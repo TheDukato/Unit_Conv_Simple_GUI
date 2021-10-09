@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class loginPanel extends JPanel implements ActionListener {
-    String NAME = "Kamil";
-    String PASSWORD = "Pokusa";
+    String NAME = "The";
+    String PASSWORD = "Dukato";
 
     JFrame frame;
 
