@@ -1,6 +1,6 @@
 package com.the.Backend;
 
-public class constantFromDB {
+public class constantDB {
     private int id;
     private String nameToName;
     private float value;
@@ -28,9 +28,16 @@ public class constantFromDB {
     public void setValue(float value) {
         this.value = value;
     }
+    public constantDB(){}
+    public constantDB(int id, String nameToName, float value){
+        this.id=id;
+        this.nameToName=nameToName;
+        this.value=value;
+    }
+
     @Override
     public String toString(){
-        return "["+id+"]" +" "+nameToName+" "+" "value;
+        return "[" + id + "]" + " " + nameToName + " " + " " + value;
     }
 
 

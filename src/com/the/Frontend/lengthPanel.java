@@ -1,6 +1,6 @@
-package com.the.GUI;
+package com.the.Frontend;
 
-import com.the.backend.claculateForGUI;
+import com.the.Backend.claculateForGUI;
 
 import javax.swing.*;
 import java.awt.*;

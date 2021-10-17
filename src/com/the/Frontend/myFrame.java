@@ -1,6 +1,4 @@
-package com.the.GUI;
-
-import com.the.GUI.loginPanel;
+package com.the.Frontend;
 
 import javax.swing.*;
 
