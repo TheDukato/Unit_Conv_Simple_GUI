@@ -9,6 +9,7 @@ public class claculateForGUI{
         score[1] = (float) (inchesMetre*gettingConst.getConstant("inchesMetre"));
         //score[0] = (float) (metreInches*39.37);
         //score[1] = (float) (inchesMetre*0.02);
+        gettingConst.closeConnection();
         return score;
     }
 
@@ -18,7 +19,8 @@ public class claculateForGUI{
         score[0] = (float) (kilosPounds*gettingConst.getConstant("kilosPounds"));
         score[1] = (float) (poundsKilos*gettingConst.getConstant("poundsKilos"));
         //score[0] = (float) (kilosPounds*2.2);
-        //score[1] = (float) (poundsKilos*0.45);
+        //score[1] = (float) (poundsKilos*0.45);c
+        gettingConst.closeConnection();
         return score;
     }
 }

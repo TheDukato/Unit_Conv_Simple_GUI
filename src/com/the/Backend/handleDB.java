@@ -35,7 +35,7 @@ public class handleDB {
         createdTalbe();
     }
     private boolean createdTalbe() {
-        String createTableOfConstant = "CREATE TABLE IF NOT EXISTS constant (id_const INTEGER PRIMARY KEY AUTOINCREMENT, nameToName varchar(255), value float)";
+        String createTableOfConstant = "CREATE TABLE IF NOT EXISTS constant (id_const INTEGER PRIMARY KEY AUTOINCREMENT, nameToName varchar(255), value float, kind varchar(255))";
         try {
             stat.execute(createTableOfConstant);
         } catch (SQLException e) {
@@ -44,12 +44,13 @@ public class handleDB {
         }
         return true;
     }
-    public boolean insertConstant(String nameToName, float value) {
+    public boolean insertConstant(String nameToName, float value, String kind) {
         //Method adding record to DB
         try {
-            PreparedStatement prepStmt = conn.prepareStatement("Insert Into constant values (NULL, ?, ?);");
+            PreparedStatement prepStmt = conn.prepareStatement("Insert Into constant values (NULL, ?, ?, ?);");
             prepStmt.setString(1, nameToName);
             prepStmt.setFloat(2, value);
+            prepStmt.setString(3, kind);
             prepStmt.execute();
         } catch (SQLException e) {
             System.err.print("Unexpection error when adding record");
@@ -66,11 +67,13 @@ public class handleDB {
             int id;
             String nameToName;
             float value;
+            String kind;
             while (result.next()) {
                 id = result.getInt("id_const");
                 nameToName = result.getString("nameToName");
                 value = result.getFloat("value");
-                constantTable.add(new constantDB(id, nameToName, value));
+                kind = result.getString("kind");
+                constantTable.add(new constantDB(id, nameToName, value, kind));
             }
         }catch (SQLException e) {
             System.err.print("Unexpection error when reading record");
@@ -83,7 +86,7 @@ public class handleDB {
         try {
             ResultSet result = stat.executeQuery("SELECT * FROM constant");
             while (result.next()) {
-                if(selectedName.equals(result.getInt("id_const"))) {
+                if(selectedName.equals(result.getString("nameToName"))) {
                     value = result.getFloat("value");
                 }
             }
@@ -93,7 +96,7 @@ public class handleDB {
             return 1;
         }
         if (value==0){
-            System.err.print("Wrong value readed from DB");
+            System.err.print("Wrong value read from DB");
             return 1;
         }
         return value;
@@ -108,6 +111,22 @@ public class handleDB {
             System.err.println("Unexpection error when try to close database");
             e.printStackTrace();
         }
+    }
+    public String getKind(int id) {
+        String ret = new String();
+        try {
+            ResultSet result = stat.executeQuery("SELECT * FROM constant");
+            while (result.next()) {
+                if(id == result.getInt("id_const")) {
+                     ret = result.getString("kind");
+                }
+            }
+        }catch (SQLException e) {
+            System.err.print("Unexpection error when reading record");
+            e.printStackTrace();
+        }
+        return ret;
+
     }
 }
 
